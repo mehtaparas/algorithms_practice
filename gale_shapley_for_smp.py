@@ -5,27 +5,35 @@ def find_stable_marriages(bachelors, bachelorettes):
     :param bachelorettes: dictionary where keys are the bachelorettes and the values are a list of bachelors in order of preferences
     :return: dictionary of stable marriages where keys are the husband and values are the wife
     """
-    marriages = {}
-    unmarried_bachelors = [b for b in bachelors.keys() if b not in marriages]
 
-    while unmarried_bachelors:
-        bachelor = unmarried_bachelors.pop(0)
+    marriages = {}
+    current_bachelors = [b for b in bachelors.keys() if b not in marriages]
+
+    # keep running till all bachelors are assigned a partner
+    while current_bachelors:
+        # select first bachelor remove from list
+        bachelor = current_bachelors.pop(0)
+        # select first choice and remove from list:
+        # this keeps track of partners the bachelor has already tried - i.e. - prevents infinite loop
         first_choice = bachelors[bachelor].pop(0)
 
         if first_choice not in marriages.values():
             marriages[bachelor] = first_choice
         else:
             rank_of_bachelor = bachelorettes[first_choice].index(bachelor)
+            # invert dictionary to make it easy to get the current_partner of bachelorette
             marriages_by_bachelorette = {val: key for key, val in marriages.items()}
             current_partner = marriages_by_bachelorette[first_choice]
             rank_of_current_partner = bachelorettes[first_choice].index(current_partner)
 
+            # switch partners if first_choice prefers bachelor over current_partner
             if rank_of_bachelor < rank_of_current_partner:
                 marriages[bachelor] = first_choice
                 del marriages[current_partner]
-                unmarried_bachelors.append(current_partner)
+                current_bachelors.append(current_partner)
             else:
-                unmarried_bachelors.append(bachelor)
+                # add bachelor back to current_bachelors list
+                current_bachelors.append(bachelor)
 
     return marriages
 
@@ -44,4 +52,3 @@ if __name__ == '__main__':
                      5: ["a", "d", "c", "b", "e"]}
 
     print(find_stable_marriages(bachelors, bachelorettes))
-
