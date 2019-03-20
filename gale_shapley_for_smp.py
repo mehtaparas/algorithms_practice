@@ -1,11 +1,13 @@
 def find_stable_marriages(bachelors, bachelorettes):
     """
+
     Implementation of Gale-Shapley algorithm for solving the Stable Marriage Problem
     :param bachelors: dictionary where keys are the bachelors and
         the values are a list of bachelorettes in order of preferences
     :param bachelorettes: dictionary where keys are the bachelorettes
         and the values are a list of bachelors in order of preferences
     :return: dictionary of stable marriages where keys are the husband and values are the wife
+
     """
     
     marriages = {}
