@@ -31,7 +31,8 @@ def find_stable_marriages(bachelors, bachelorettes):
             # switch partners if first_choice prefers bachelor over current_partner
             if rank_of_bachelor < rank_of_current_partner:
                 marriages[bachelor] = first_choice
-                del marriages[current_partner]
+                # move current_partner back to bachelors list
+		del marriages[current_partner]
                 current_bachelors.append(current_partner)
             else:
                 # add bachelor back to current_bachelors list
