@@ -7,7 +7,7 @@ def find_stable_marriages(bachelors, bachelorettes):
         and the values are a list of bachelors in order of preferences
     :return: dictionary of stable marriages where keys are the husband and values are the wife
     """
-
+    
     marriages = {}
     current_bachelors = [b for b in bachelors.keys() if b not in marriages]
 
@@ -42,6 +42,7 @@ def find_stable_marriages(bachelors, bachelorettes):
 
 
 def main():
+    
     bachelors = {"a": [5, 3, 2, 4, 1],
                  "b": [1, 3, 4, 5, 2],
                  "c": [5, 3, 2, 1, 4],
